@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { FaGithub, FaExternalLinkAlt, FaStar, FaCodeBranch } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
+import { usePortfolioData } from '@/hooks/usePortfolioData'
 
 interface Project {
   title: string
@@ -19,9 +20,10 @@ interface Project {
 
 export default function Projects() {
   const { t, language } = useLanguage()
+  const { data } = usePortfolioData('projects')
 
   // Replace this with your actual projects
-  const projects: Project[] = [
+  const defaultProjects: Project[] = [
     {
       title: 'E-Commerce Platform',
       titleZh: '電子商務平台',
@@ -87,6 +89,8 @@ export default function Projects() {
       forks: 11,
     },
   ]
+
+  const projects: Project[] = (data && Array.isArray(data)) ? data : defaultProjects
 
   return (
     <section className="section-padding bg-gray-50 dark:bg-gray-800 pt-24">

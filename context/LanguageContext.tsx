@@ -93,7 +93,7 @@ const translations = {
     'nav.competitions': '競賽',
     'nav.education': '教育',
     'nav.skills': '技能',
-    'nav.organizations': '組織',
+    'nav.organisations': '組織',
     'nav.contact': '聯絡',
     
     // Hero

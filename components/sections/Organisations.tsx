@@ -2,19 +2,28 @@
 
 import { motion } from 'framer-motion'
 import { FaSchool, FaUsers, FaBriefcase } from 'react-icons/fa'
+import { useLanguage } from '@/context/LanguageContext'
+import { usePortfolioData } from '@/hooks/usePortfolioData'
 
 interface Organisation {
   type: 'school' | 'club' | 'external'
   name: string
+  nameZh?: string
   role: string
+  roleZh?: string
   period: string
   description: string
+  descriptionZh?: string
   achievements?: string[]
+  achievementsZh?: string[]
 }
 
 export default function Organisations() {
+  const { t, language } = useLanguage()
+  const { data } = usePortfolioData('organisations')
+
   // Replace with your actual organisations
-  const organisations: Organisation[] = [
+  const defaultOrganisations: Organisation[] = [
     {
       type: 'school',
       name: 'Student Council',
@@ -85,6 +94,8 @@ export default function Organisations() {
       ],
     },
   ]
+  
+  const organisations: Organisation[] = (data && Array.isArray(data)) ? data : defaultOrganisations
 
   const schoolOrgs = organisations.filter(org => org.type === 'school')
   const clubOrgs = organisations.filter(org => org.type === 'club')
@@ -112,7 +123,7 @@ export default function Organisations() {
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
                 <h4 className="text-xl font-bold text-gray-900 dark:text-white">
-                  {org.name}
+                  {language === 'zh' ? (org.nameZh || org.name) : org.name}
                 </h4>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
                   {org.period}
@@ -120,20 +131,20 @@ export default function Organisations() {
               </div>
               
               <p className="text-lg text-primary font-semibold mb-3">
-                {org.role}
+                {language === 'zh' ? (org.roleZh || org.role) : org.role}
               </p>
               
               <p className="text-gray-700 dark:text-gray-300 mb-4">
-                {org.description}
+                {language === 'zh' ? (org.descriptionZh || org.description) : org.description}
               </p>
               
-              {org.achievements && org.achievements.length > 0 && (
+              {((language === 'zh' ? org.achievementsZh : org.achievements) || org.achievements) && ((language === 'zh' ? org.achievementsZh : org.achievements) || org.achievements)!.length > 0 && (
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white mb-2">
-                    Key Achievements:
+                    {language === 'zh' ? '主要成就：' : 'Key Achievements:'}
                   </p>
                   <ul className="list-disc list-inside space-y-1">
-                    {org.achievements.map((achievement, achIndex) => (
+                    {((language === 'zh' ? org.achievementsZh : org.achievements) || org.achievements)!.map((achievement, achIndex) => (
                       <li key={achIndex} className="text-gray-700 dark:text-gray-300">
                         {achievement}
                       </li>

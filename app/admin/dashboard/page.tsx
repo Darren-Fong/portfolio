@@ -68,7 +68,7 @@ export default function AdminDashboard() {
     {
       title: 'Organisations',
       icon: <FaUsers size={32} />,
-      href: '/admin/organizations',
+      href: '/admin/organisations',
       color: 'bg-indigo-500',
     },
     {

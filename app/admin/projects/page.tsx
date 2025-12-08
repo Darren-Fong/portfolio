@@ -5,24 +5,36 @@ import { useRouter } from 'next/navigation'
 import { useAdmin } from '@/context/AdminContext'
 import { usePortfolioData } from '@/hooks/usePortfolioData'
 import Link from 'next/link'
-import { FaArrowLeft, FaSave } from 'react-icons/fa'
+import { FaArrowLeft, FaPlus, FaTrash, FaChevronDown, FaChevronUp } from 'react-icons/fa'
+
+interface Project {
+  title: string
+  titleZh: string
+  description: string
+  descriptionZh: string
+  technologies: string[]
+  githubUrl: string
+  liveUrl?: string
+  stars?: number
+  forks?: number
+  image?: string
+}
 
 export default function AdminProjects() {
   const { isAuthenticated } = useAdmin()
   const router = useRouter()
   const { data, loading, saveData } = usePortfolioData('projects')
   const [saving, setSaving] = useState(false)
-  const [jsonData, setJsonData] = useState('')
+  const [projects, setProjects] = useState<Project[]>([])
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(0)
 
   useEffect(() => {
     if (!isAuthenticated) router.push('/admin')
   }, [isAuthenticated, router])
 
   useEffect(() => {
-    if (data) {
-      setJsonData(JSON.stringify(data, null, 2))
-    } else {
-      setJsonData(JSON.stringify({ projects: [] }, null, 2))
+    if (data && Array.isArray(data)) {
+      setProjects(data)
     }
   }, [data])
 
@@ -33,51 +45,184 @@ export default function AdminProjects() {
     setSaving(true)
     
     try {
-      const parsed = JSON.parse(jsonData)
-      await saveData(parsed)
-      alert('✓ Projects saved!')
+      await saveData(projects)
+      alert('Projects saved successfully!')
     } catch (error) {
-      alert('✗ Invalid JSON or save failed')
+      alert('Failed to save projects.')
     } finally {
       setSaving(false)
     }
   }
 
+  const addProject = () => {
+    setProjects([
+      ...projects,
+      {
+        title: '',
+        titleZh: '',
+        description: '',
+        descriptionZh: '',
+        technologies: [],
+        githubUrl: '',
+      }
+    ])
+    setExpandedIndex(projects.length)
+  }
+
+  const removeProject = (index: number) => {
+    if (confirm('Are you sure you want to delete this project?')) {
+      setProjects(projects.filter((_, i) => i !== index))
+      if (expandedIndex === index) setExpandedIndex(null)
+    }
+  }
+
+  const updateProject = (index: number, field: keyof Project, value: any) => {
+    const newProjects = [...projects]
+    newProjects[index] = { ...newProjects[index], [field]: value }
+    setProjects(newProjects)
+  }
+
+  const updateTechnologies = (index: number, value: string) => {
+    const techs = value.split(',').map(t => t.trim()).filter(t => t)
+    updateProject(index, 'technologies', techs)
+  }
+
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-16 flex items-center justify-center">
-        <div className="text-gray-900 dark:text-white">Loading...</div>
-      </div>
-    )
+    return <div className="p-8 text-center">Loading...</div>
   }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-16">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4">
         <div className="mb-8">
           <Link href="/admin/dashboard" className="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors mb-4">
-            <FaArrowLeft /> Back
+            <FaArrowLeft /> Back to Dashboard
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Projects</h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Manage Projects</h1>
+            <button onClick={addProject} className="btn-primary flex items-center gap-2">
+              <FaPlus /> Add Project
+            </button>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="card">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Edit Projects (JSON)</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Format: {`{ "projects": [{ "title": "...", "titleZh": "...", "description": "...", "descriptionZh": "...", "technologies": ["..."], "github": "...", "demo": "..." }] }`}
-            </p>
-            <textarea
-              value={jsonData}
-              onChange={(e) => setJsonData(e.target.value)}
-              rows={20}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono text-sm resize-none"
-            />
-          </div>
+          {projects.map((project, index) => (
+            <div key={index} className="card">
+              <div className="flex justify-between items-center mb-4 cursor-pointer" onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {project.title || `Project ${index + 1}`}
+                </h3>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); removeProject(index); }}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    <FaTrash />
+                  </button>
+                  {expandedIndex === index ? <FaChevronUp /> : <FaChevronDown />}
+                </div>
+              </div>
 
-          <button type="submit" disabled={saving} className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50">
-            <FaSave /> {saving ? 'Saving...' : 'Save'}
-          </button>
+              {expandedIndex === index && (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Title (English)</label>
+                      <input
+                        type="text"
+                        value={project.title}
+                        onChange={(e) => updateProject(index, 'title', e.target.value)}
+                        className="input-field w-full"
+                        placeholder="Project Name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Title (Chinese)</label>
+                      <input
+                        type="text"
+                        value={project.titleZh}
+                        onChange={(e) => updateProject(index, 'titleZh', e.target.value)}
+                        className="input-field w-full"
+                        placeholder="專案名稱"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Description (English)</label>
+                    <textarea
+                      value={project.description}
+                      onChange={(e) => updateProject(index, 'description', e.target.value)}
+                      className="input-field w-full h-24"
+                      placeholder="Project description..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Description (Chinese)</label>
+                    <textarea
+                      value={project.descriptionZh}
+                      onChange={(e) => updateProject(index, 'descriptionZh', e.target.value)}
+                      className="input-field w-full h-24"
+                      placeholder="專案描述..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Technologies (comma separated)</label>
+                    <input
+                      type="text"
+                      value={project.technologies.join(', ')}
+                      onChange={(e) => updateTechnologies(index, e.target.value)}
+                      className="input-field w-full"
+                      placeholder="React, Node.js, TypeScript"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">GitHub URL</label>
+                      <input
+                        type="text"
+                        value={project.githubUrl}
+                        onChange={(e) => updateProject(index, 'githubUrl', e.target.value)}
+                        className="input-field w-full"
+                        placeholder="https://github.com/..."
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-2">Live URL (Optional)</label>
+                      <input
+                        type="text"
+                        value={project.liveUrl || ''}
+                        onChange={(e) => updateProject(index, 'liveUrl', e.target.value)}
+                        className="input-field w-full"
+                        placeholder="https://..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {projects.length === 0 && (
+            <div className="text-center py-12 text-gray-500">
+              No projects yet. Click "Add Project" to create one.
+            </div>
+          )}
+
+          <div className="fixed bottom-8 right-8">
+            <button
+              type="submit"
+              disabled={saving}
+              className="btn-primary shadow-lg flex items-center gap-2 px-6 py-3 rounded-full"
+            >
+              <FaSave /> {saving ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
         </form>
       </div>
     </div>
