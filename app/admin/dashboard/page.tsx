@@ -30,6 +30,12 @@ export default function AdminDashboard() {
 
   const sections = [
     {
+      title: 'Hero Section',
+      icon: <FaUser size={32} />,
+      href: '/admin/hero',
+      color: 'bg-cyan-500',
+    },
+    {
       title: 'About Me',
       icon: <FaUser size={32} />,
       href: '/admin/about',
