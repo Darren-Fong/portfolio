@@ -19,10 +19,10 @@ async function getAllData() {
 // GET - Read specific section
 export async function GET(
   request: NextRequest,
-  { params }: { params: { section: string } }
+  context: { params: Promise<{ section: string }> }
 ) {
   try {
-    const section = params.section
+    const { section } = await context.params
     const portfolioData = await getAllData()
     
     return NextResponse.json(portfolioData[section] || {})
@@ -35,10 +35,10 @@ export async function GET(
 // POST - Save specific section
 export async function POST(
   request: NextRequest,
-  { params }: { params: { section: string } }
+  context: { params: Promise<{ section: string }> }
 ) {
   try {
-    const section = params.section
+    const { section } = await context.params
     const sectionData = await request.json()
     
     // Get existing data
