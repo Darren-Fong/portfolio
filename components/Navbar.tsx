@@ -11,7 +11,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const { language, setLanguage, t } = useLanguage()
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme, mounted } = useTheme()
 
   const navItems = [
     { name: t('nav.home'), href: '/' },
@@ -47,17 +47,19 @@ export default function Navbar() {
             ))}
             
             {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? (
-                <FaMoon className="text-gray-700 dark:text-gray-300" size={20} />
-              ) : (
-                <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
-              )}
-            </button>
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'light' ? (
+                  <FaMoon className="text-gray-700 dark:text-gray-300" size={20} />
+                ) : (
+                  <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
+                )}
+              </button>
+            )}
 
             {/* Language Toggle */}
             <button
@@ -66,19 +68,21 @@ export default function Navbar() {
             >
               {language === 'en' ? '中文' : 'EN'}
             </button>
-          </div>
-
           {/* Mobile menu button */}
           <div className="flex lg:hidden items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? (
-                <FaMoon className="text-gray-700 dark:text-gray-300" size={20} />
-              ) : (
-                <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'light' ? (
+                  <FaMoon className="text-gray-700 dark:text-gray-300" size={20} />
+                ) : (
+                  <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
+                )}
+              </button>
+            )}n className="text-gray-700 dark:text-gray-300" size={20} />
               )}
             </button>
 
