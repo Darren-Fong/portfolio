@@ -68,6 +68,8 @@ export default function Navbar() {
             >
               {language === 'en' ? '中文' : 'EN'}
             </button>
+          </div>
+
           {/* Mobile menu button */}
           <div className="flex lg:hidden items-center gap-3">
             {mounted && (
