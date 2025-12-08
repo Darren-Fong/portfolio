@@ -82,9 +82,7 @@ export default function Navbar() {
                   <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
                 )}
               </button>
-            )}n className="text-gray-700 dark:text-gray-300" size={20} />
-              )}
-            </button>
+            )}
 
             <button
               onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
