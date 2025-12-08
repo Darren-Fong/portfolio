@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { put, head } from '@vercel/blob'
+import { put, head, del } from '@vercel/blob'
 
 const BLOB_KEY = 'portfolio-data.json'
 
@@ -47,10 +47,21 @@ export async function POST(
     // Update section
     portfolioData[section] = sectionData
     
+    // Delete old blob if exists
+    try {
+      const oldBlob = await head(BLOB_KEY).catch(() => null)
+      if (oldBlob) {
+        await del(oldBlob.url)
+      }
+    } catch (e) {
+      // Ignore deletion errors
+    }
+    
     // Save back to blob
-    await put(BLOB_KEY, JSON.stringify(portfolioData, null, 2), {
+    const blob = await put(BLOB_KEY, JSON.stringify(portfolioData, null, 2), {
       access: 'public',
       contentType: 'application/json',
+      addRandomSuffix: false,
     })
     
     return NextResponse.json({ 

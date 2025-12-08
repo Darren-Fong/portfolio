@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { put, head } from '@vercel/blob'
+import { put, head, del } from '@vercel/blob'
 
 const BLOB_KEY = 'portfolio-data.json'
 
@@ -29,10 +29,21 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json()
     
+    // Delete old blob if exists
+    try {
+      const oldBlob = await head(BLOB_KEY).catch(() => null)
+      if (oldBlob) {
+        await del(oldBlob.url)
+      }
+    } catch (e) {
+      // Ignore deletion errors
+    }
+    
     // Upload to Vercel Blob
-    const blob = await put(BLOB_KEY, JSON.stringify(data, null, 2), {
+    await put(BLOB_KEY, JSON.stringify(data, null, 2), {
       access: 'public',
       contentType: 'application/json',
+      addRandomSuffix: false,
     })
     
     return NextResponse.json({ 
