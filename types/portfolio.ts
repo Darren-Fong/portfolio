@@ -103,7 +103,7 @@ export const defaultData: PortfolioData = {
     introZh: '我是一名充滿熱情的學生，對科技和創新充滿熱愛。我在科技領域的旅程源於好奇心，以及創造有意義解決方案的渴望。',
     journey: 'Throughout my academic journey, I\'ve participated in various competitions, earned certifications, and worked on diverse projects that have helped me develop both technical and soft skills. I\'m constantly learning and exploring new technologies to expand my knowledge and capabilities.',
     journeyZh: '在學術旅程中，我參加了各種競賽，獲得了認證，並參與了多元化的專案，這些經歷幫助我發展了技術和軟技能。我不斷學習和探索新技術，以擴展我的知識和能力。',
-    beyond: 'Beyond academics, I\'m actively involved in organizations and initiatives that align with my interests and values. I believe in continuous growth, collaboration, and making a positive impact in my community.',
+    beyond: 'Beyond academics, I\'m actively involved in organisations and initiatives that align with my interests and values. I believe in continuous growth, collaboration, and making a positive impact in my community.',
     beyondZh: '除了學術之外，我積極參與符合我興趣和價值觀的組織和倡議。我相信持續成長、協作，並在社區中產生積極影響。',
   },
   projects: [],

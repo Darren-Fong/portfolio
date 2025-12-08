@@ -48,7 +48,7 @@ export const competitionsData = {
         {
           name: 'Regional MUN Conference',
           year: '2023',
-          award: 'Honorable Mention',
+          award: 'Honourable Mention',
           description: 'Debated climate change policies in the Environment Committee.',
         },
       ],

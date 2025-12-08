@@ -20,9 +20,9 @@ export default function Organisations() {
       name: 'Student Council',
       role: 'Vice President',
       period: '2023 - 2024',
-      description: 'Led initiatives to improve student life and organized school-wide events.',
+      description: 'Led initiatives to improve student life and organised school-wide events.',
       achievements: [
-        'Organized annual charity fundraiser raising $10,000',
+        'Organised annual charity fundraiser raising $10,000',
         'Implemented new student feedback system',
         'Coordinated 15+ school events',
       ],
@@ -46,7 +46,7 @@ export default function Organisations() {
       description: 'Founded and led the school coding club, teaching programming to 50+ students.',
       achievements: [
         'Grew club from 10 to 50+ members',
-        'Organized hackathons and coding workshops',
+        'Organised hackathons and coding workshops',
         'Mentored students in competition preparation',
       ],
     },
@@ -68,7 +68,7 @@ export default function Organisations() {
       period: '2023 - Present',
       description: 'Coordinated environmental awareness campaigns and community clean-up events.',
       achievements: [
-        'Organized 10+ community clean-up events',
+        'Organised 10+ community clean-up events',
         'Engaged 200+ youth volunteers',
         'Partnered with local government for sustainability initiatives',
       ],
@@ -78,7 +78,7 @@ export default function Organisations() {
       name: 'Tech for Good Initiative',
       role: 'Web Developer',
       period: '2022 - Present',
-      description: 'Developed websites for non-profit organizations to amplify their social impact.',
+      description: 'Developed websites for non-profit organisations to amplify their social impact.',
       achievements: [
         'Built websites for 3 NGOs',
         'Provided pro-bono tech consulting',
@@ -158,10 +158,10 @@ export default function Organisations() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
-            Organizations & Experience
+            Organisations & Experience
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-            My involvement in various organizations and the experiences I've gained.
+            My involvement in various organisations and the experiences I've gained.
           </p>
           
           {renderOrganisations(schoolOrgs, 'School Leadership', <FaSchool className="text-primary" />)}

@@ -35,7 +35,7 @@ export default function AdminOrganizations() {
     try {
       const parsed = JSON.parse(jsonData)
       await saveData(parsed)
-      alert('✓ Organizations saved!')
+      alert('✓ Organisations saved!')
     } catch (error) {
       alert('✗ Invalid JSON or save failed')
     } finally {
@@ -58,12 +58,12 @@ export default function AdminOrganizations() {
           <Link href="/admin/dashboard" className="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors mb-4">
             <FaArrowLeft /> Back
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Organizations</h1>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Organisations</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="card">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Edit Organizations (JSON)</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Edit Organisations (JSON)</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               Format: {`{ "organizations": [{ "name": "...", "nameZh": "...", "role": "...", "roleZh": "...", "period": "...", "periodZh": "...", "description": "...", "descriptionZh": "..." }] }`}
             </p>
