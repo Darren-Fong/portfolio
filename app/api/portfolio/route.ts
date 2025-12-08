@@ -6,24 +6,15 @@ const BLOB_KEY = 'portfolio-data.json'
 // GET - Read portfolio data
 export async function GET() {
   try {
-    // Check if blob exists
     const blobInfo = await head(BLOB_KEY).catch(() => null)
+    if (!blobInfo) return NextResponse.json({})
     
-    if (!blobInfo) {
-      console.log('No blob found in main route')
-      return NextResponse.json({})
-    }
-    
-    // Fetch blob data with cache-busting
     const response = await fetch(`${blobInfo.url}?t=${Date.now()}`, {
       cache: 'no-store'
     })
     const data = await response.json()
-    
-    console.log('Fetched all portfolio data:', data)
     return NextResponse.json(data)
   } catch (error) {
-    console.error('Error reading data:', error)
     return NextResponse.json({})
   }
 }
