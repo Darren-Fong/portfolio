@@ -88,5 +88,5 @@ export async function POST(
     console.error('Error saving section:', error)
     return NextResponse.json({ error: 'Failed to save section' }, { status: 500 })
   }
-} }
 }
+
