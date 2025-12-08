@@ -48,9 +48,6 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
         >
-          <Link href="/about" className="inline-block animate-bounce">
-            <FaChevronDown className="text-primary text-3xl" />
-          </Link>
         </motion.div>
       </div>
     </section>
