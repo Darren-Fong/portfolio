@@ -31,9 +31,7 @@ export async function GET(
     return NextResponse.json({})
   }
 }
-// POST - Save specific section
-export async function POST(
-  request: NextRequest,
+
 // POST - Save specific section
 export async function POST(
   request: NextRequest,
