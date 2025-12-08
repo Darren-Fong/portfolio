@@ -10,13 +10,17 @@ export async function GET() {
     const blobInfo = await head(BLOB_KEY).catch(() => null)
     
     if (!blobInfo) {
+      console.log('No blob found in main route')
       return NextResponse.json({})
     }
     
-    // Fetch blob data
-    const response = await fetch(blobInfo.url)
+    // Fetch blob data with cache-busting
+    const response = await fetch(`${blobInfo.url}?t=${Date.now()}`, {
+      cache: 'no-store'
+    })
     const data = await response.json()
     
+    console.log('Fetched all portfolio data:', data)
     return NextResponse.json(data)
   } catch (error) {
     console.error('Error reading data:', error)
