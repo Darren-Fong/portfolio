@@ -99,7 +99,6 @@ const translations = {
     // Hero
     'hero.greeting': '你好，我是',
     'hero.name': '方子維',
-    'hero.name': '方俊賢',
     'hero.title': '學生 | 開發者 | 問題解決者',
     'hero.description': '熱衷於科技、競賽程式設計，並透過創新帶來改變。',
     'hero.viewWork': '查看作品',
