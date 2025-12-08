@@ -21,7 +21,7 @@ const translations = {
     'nav.competitions': 'Competitions',
     'nav.education': 'Education',
     'nav.skills': 'Skills',
-    'nav.organizations': 'Organizations',
+    'nav.organisations': 'Organisations',
     'nav.contact': 'Contact',
     
     // Hero
@@ -58,12 +58,12 @@ const translations = {
     'skills.title': 'Skills & Technologies',
     'skills.subtitle': 'Technologies and tools I work with to build amazing projects.',
     
-    // Organizations
-    'organizations.title': 'Organizations & Experience',
-    'organizations.subtitle': 'My involvement in various organizations and the experiences I\'ve gained.',
+    // Organisations
+    'organizations.title': 'Organisations & Experience',
+    'organizations.subtitle': 'My involvement in various organisations and the experiences I\'ve gained.',
     'organizations.school': 'School Leadership',
     'organizations.clubs': 'Clubs & Societies',
-    'organizations.external': 'External Organizations',
+    'organizations.external': 'External Organisations',
     'organizations.achievements': 'Key Achievements:',
     
     // Contact

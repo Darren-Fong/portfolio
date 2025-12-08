@@ -20,7 +20,7 @@ export default function Navbar() {
     { name: t('nav.competitions'), href: '/competitions' },
     { name: t('nav.education'), href: '/education' },
     { name: t('nav.skills'), href: '/skills' },
-    { name: t('nav.organizations'), href: '/organizations' },
+    { name: t('nav.organisations'), href: '/organizations' },
     { name: t('nav.contact'), href: '/contact' },
   ]
 
