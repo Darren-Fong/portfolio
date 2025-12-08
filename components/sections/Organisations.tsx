@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { FaSchool, FaUsers, FaBriefcase } from 'react-icons/fa'
 
-interface Organization {
+interface Organisation {
   type: 'school' | 'club' | 'external'
   name: string
   role: string
@@ -12,9 +12,9 @@ interface Organization {
   achievements?: string[]
 }
 
-export default function Organizations() {
-  // Replace with your actual organizations
-  const organizations: Organization[] = [
+export default function Organisations() {
+  // Replace with your actual organisations
+  const organisations: Organisation[] = [
     {
       type: 'school',
       name: 'Student Council',
@@ -86,11 +86,11 @@ export default function Organizations() {
     },
   ]
 
-  const schoolOrgs = organizations.filter(org => org.type === 'school')
-  const clubOrgs = organizations.filter(org => org.type === 'club')
-  const externalOrgs = organizations.filter(org => org.type === 'external')
+  const schoolOrgs = organisations.filter(org => org.type === 'school')
+  const clubOrgs = organisations.filter(org => org.type === 'club')
+  const externalOrgs = organisations.filter(org => org.type === 'external')
 
-  const renderOrganizations = (orgs: Organization[], title: string, icon: React.ReactNode) => {
+  const renderOrganisations = (orgs: Organisation[], title: string, icon: React.ReactNode) => {
     if (orgs.length === 0) return null
     
     return (
@@ -149,7 +149,7 @@ export default function Organizations() {
   }
 
   return (
-    <section id="organizations" className="section-padding bg-gray-50 dark:bg-gray-800">
+    <section id="organisations" className="section-padding bg-gray-50 dark:bg-gray-800">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -164,9 +164,9 @@ export default function Organizations() {
             My involvement in various organizations and the experiences I've gained.
           </p>
           
-          {renderOrganizations(schoolOrgs, 'School Leadership', <FaSchool className="text-primary" />)}
-          {renderOrganizations(clubOrgs, 'Clubs & Societies', <FaUsers className="text-secondary" />)}
-          {renderOrganizations(externalOrgs, 'External Organizations', <FaBriefcase className="text-primary" />)}
+          {renderOrganisations(schoolOrgs, 'School Leadership', <FaSchool className="text-primary" />)}
+          {renderOrganisations(clubOrgs, 'Clubs & Societies', <FaUsers className="text-secondary" />)}
+          {renderOrganisations(externalOrgs, 'External Organisations', <FaBriefcase className="text-primary" />)}
         </motion.div>
       </div>
     </section>

@@ -1,5 +1,5 @@
-import Organizations from '@/components/sections/Organizations'
+import Organisations from '@/components/sections/Organisations'
 
-export default function OrganizationsPage() {
-  return <Organizations />
+export default function OrganisationsPage() {
+  return <Organisations />
 }
