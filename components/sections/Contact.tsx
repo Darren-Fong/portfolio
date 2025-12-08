@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Contact() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -37,19 +39,19 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: <FaEnvelope />,
-      label: 'Email',
-      value: 'your.email@example.com',
-      href: 'mailto:your.email@example.com',
+      label: t('contact.emailLabel'),
+      value: 'darren.fong@example.com',
+      href: 'mailto:darren.fong@example.com',
     },
     {
       icon: <FaPhone />,
-      label: 'Phone',
-      value: '+852 1234 5678',
-      href: 'tel:+85212345678',
+      label: t('contact.phone'),
+      value: '+852 9123 4567',
+      href: 'tel:+85291234567',
     },
     {
       icon: <FaMapMarkerAlt />,
-      label: 'Location',
+      label: t('contact.location'),
       value: 'Hong Kong',
       href: null,
     },
@@ -59,17 +61,17 @@ export default function Contact() {
     {
       icon: <FaGithub size={28} />,
       label: 'GitHub',
-      href: 'https://github.com/yourusername',
+      href: 'https://github.com/Darren-Fong',
     },
     {
       icon: <FaLinkedin size={28} />,
       label: 'LinkedIn',
-      href: 'https://linkedin.com/in/yourusername',
+      href: 'https://linkedin.com/in/darren-fong',
     },
   ]
 
   return (
-    <section id="contact" className="section-padding bg-white dark:bg-gray-900">
+    <section className="section-padding bg-white dark:bg-gray-900 pt-24">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -78,17 +80,17 @@ export default function Contact() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
-            Get In Touch
+            {t('contact.title')}
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-            Have a question or want to work together? Feel free to reach out!
+            {t('contact.subtitle')}
           </p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div>
               <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                Contact Information
+                {t('contact.info')}
               </h3>
               
               <div className="space-y-4 mb-8">
@@ -126,7 +128,7 @@ export default function Contact() {
               </div>
 
               <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                Connect With Me
+                {t('contact.connect')}
               </h3>
               
               <div className="flex gap-4">
@@ -157,7 +159,7 @@ export default function Contact() {
                     htmlFor="name"
                     className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white"
                   >
-                    Name
+                    {t('contact.name')}
                   </label>
                   <input
                     type="text"
@@ -175,7 +177,7 @@ export default function Contact() {
                     htmlFor="email"
                     className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white"
                   >
-                    Email
+                    {t('contact.email')}
                   </label>
                   <input
                     type="email"
@@ -193,7 +195,7 @@ export default function Contact() {
                     htmlFor="subject"
                     className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white"
                   >
-                    Subject
+                    {t('contact.subject')}
                   </label>
                   <input
                     type="text"
@@ -211,7 +213,7 @@ export default function Contact() {
                     htmlFor="message"
                     className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white"
                   >
-                    Message
+                    {t('contact.message')}
                   </label>
                   <textarea
                     id="message"
@@ -229,7 +231,7 @@ export default function Contact() {
                   disabled={status === 'sending'}
                   className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                  {status === 'sending' ? t('contact.sending') : t('contact.send')}
                 </button>
 
                 {status === 'success' && (
@@ -238,7 +240,7 @@ export default function Contact() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mt-4 text-green-600 dark:text-green-400 text-center"
                   >
-                    Message sent successfully! I'll get back to you soon.
+                    {t('contact.success')}
                   </motion.p>
                 )}
               </form>

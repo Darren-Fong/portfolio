@@ -2,19 +2,26 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { usePathname } from 'next/navigation'
+import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa'
+import { useLanguage } from '@/context/LanguageContext'
+import { useTheme } from '@/context/ThemeContext'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
+  const { language, setLanguage, t } = useLanguage()
+  const { theme, toggleTheme } = useTheme()
 
   const navItems = [
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Competitions', href: '#competitions' },
-    { name: 'Education', href: '#education' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Organizations', href: '#organizations' },
-    { name: 'Contact', href: '#contact' },
+    { name: t('nav.home'), href: '/' },
+    { name: t('nav.about'), href: '/about' },
+    { name: t('nav.projects'), href: '/projects' },
+    { name: t('nav.competitions'), href: '/competitions' },
+    { name: t('nav.education'), href: '/education' },
+    { name: t('nav.skills'), href: '/skills' },
+    { name: t('nav.organizations'), href: '/organizations' },
+    { name: t('nav.contact'), href: '/contact' },
   ]
 
   return (
@@ -22,43 +29,89 @@ export default function Navbar() {
       <div className="container-custom">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-2xl font-bold text-primary">
-            Portfolio
+            {language === 'en' ? 'Portfolio' : '作品集'}
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors duration-300"
+                className={`text-gray-700 dark:text-gray-300 hover:text-primary transition-colors duration-300 ${
+                  pathname === item.href ? 'text-primary font-semibold' : ''
+                }`}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
+            
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <FaMoon className="text-gray-700 dark:text-gray-300" size={20} />
+              ) : (
+                <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
+              )}
+            </button>
+
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
+              className="px-3 py-1 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
+            >
+              {language === 'en' ? '中文' : 'EN'}
+            </button>
           </div>
 
           {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-700 dark:text-gray-300"
-          >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
+          <div className="flex lg:hidden items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <FaMoon className="text-gray-700 dark:text-gray-300" size={20} />
+              ) : (
+                <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
+              )}
+            </button>
+
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
+              className="px-3 py-1 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300 font-semibold text-sm"
+            >
+              {language === 'en' ? '中文' : 'EN'}
+            </button>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-700 dark:text-gray-300"
+            >
+              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4">
+          <div className="lg:hidden pb-4">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors duration-300"
+                className={`block py-2 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors duration-300 ${
+                  pathname === item.href ? 'text-primary font-semibold' : ''
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         )}
