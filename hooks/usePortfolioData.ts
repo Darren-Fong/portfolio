@@ -15,7 +15,10 @@ export function usePortfolioData(section?: string) {
     try {
       setLoading(true)
       const url = section ? `/api/portfolio/${section}` : '/api/portfolio'
-      const response = await fetch(url)
+      // Add cache-busting parameter
+      const response = await fetch(`${url}?t=${Date.now()}`, {
+        cache: 'no-store'
+      })
       if (!response.ok) throw new Error('Failed to fetch data')
       const result = await response.json()
       setData(result)

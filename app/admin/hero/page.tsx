@@ -10,7 +10,7 @@ import { FaArrowLeft, FaSave } from 'react-icons/fa'
 export default function AdminHero() {
   const { isAuthenticated } = useAdmin()
   const router = useRouter()
-  const { data, loading, saveData } = usePortfolioData('hero')
+  const { data, loading, saveData, refetch } = usePortfolioData('hero')
   const [saving, setSaving] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
@@ -48,8 +48,10 @@ export default function AdminHero() {
     
     try {
       await saveData(formData)
-      alert('Hero section saved successfully!')
+      await refetch() // Refetch to confirm save
+      alert('Hero section saved successfully! Changes will appear on the homepage.')
     } catch (error) {
+      console.error('Save error:', error)
       alert('Failed to save data. Please try again.')
     } finally {
       setSaving(false)
