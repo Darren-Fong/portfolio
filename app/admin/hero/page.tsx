@@ -48,11 +48,11 @@ export default function AdminHero() {
     
     try {
       await saveData(formData)
-      await refetch() // Refetch to confirm save
-      alert('Hero section saved successfully! Changes will appear on the homepage.')
+      await refetch()
+      alert('✓ Hero saved! Refresh the homepage to see changes.')
     } catch (error) {
       console.error('Save error:', error)
-      alert('Failed to save data. Please try again.')
+      alert('✗ Save failed')
     } finally {
       setSaving(false)
     }

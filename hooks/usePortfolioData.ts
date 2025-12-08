@@ -42,7 +42,10 @@ export function usePortfolioData(section?: string) {
       if (!response.ok) throw new Error('Failed to save data')
       
       const result = await response.json()
+      // Immediately update local state
       setData(newData)
+      // Force refetch to confirm server state
+      setTimeout(() => fetchData(), 100)
       return result
     } catch (err) {
       throw err
