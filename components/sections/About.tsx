@@ -32,7 +32,7 @@ export default function About() {
   }
 
   return (
-    <section className="section-padding bg-white dark:bg-gray-900 pt-24">
+    <section className="section-padding bg-apple-gray-50 dark:bg-apple-gray-900 pt-24">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,11 +40,11 @@ export default function About() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+          <h2 className="text-5xl font-semibold text-center mb-16 text-apple-gray-900 dark:text-white tracking-tight">
             {t('about.title')}
           </h2>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Profile Image Placeholder */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -53,7 +53,7 @@ export default function About() {
               viewport={{ once: true }}
               className="flex justify-center"
             >
-              <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-primary shadow-2xl">
+              <div className="relative w-80 h-80 rounded-full overflow-hidden">
                 {data?.photoUrl ? (
                   <Image
                     src={data.photoUrl}
@@ -63,7 +63,7 @@ export default function About() {
                     sizes="320px"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                  <div className="w-full h-full bg-apple-gray-200 dark:bg-apple-gray-800 flex items-center justify-center">
                     <span className="text-6xl">👨‍💻</span>
                   </div>
                 )}

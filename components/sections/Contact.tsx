@@ -83,7 +83,7 @@ export default function Contact() {
   ].filter(item => item.href) // Only show items with links
 
   return (
-    <section className="section-padding bg-white dark:bg-gray-900 pt-24">
+    <section className="section-padding bg-apple-gray-50 dark:bg-apple-gray-900 pt-24">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -91,21 +91,21 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-5xl font-semibold text-center mb-6 text-apple-gray-900 dark:text-white tracking-tight">
             {t('contact.title')}
           </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-apple-gray-600 dark:text-apple-gray-400 mb-16 max-w-2xl mx-auto text-xl font-light">
             {t('contact.subtitle')}
           </p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div>
-              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+              <h3 className="text-3xl font-semibold mb-8 text-apple-gray-900 dark:text-white">
                 {t('contact.info')}
               </h3>
               
-              <div className="space-y-4 mb-8">
+              <div className="space-y-6 mb-12">
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={index}
@@ -115,22 +115,22 @@ export default function Contact() {
                     viewport={{ once: true }}
                     className="flex items-center gap-4"
                   >
-                    <div className="text-2xl text-primary">
+                    <div className="text-2xl text-apple-gray-600 dark:text-apple-gray-400">
                       {info.icon}
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-apple-gray-500 dark:text-apple-gray-500 font-light">
                         {info.label}
                       </p>
                       {info.href ? (
                         <a
                           href={info.href}
-                          className="text-gray-900 dark:text-white hover:text-primary transition-colors"
+                          className="text-apple-gray-900 dark:text-white hover:text-apple-gray-600 dark:hover:text-apple-gray-300 transition-colors"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <p className="text-gray-900 dark:text-white">
+                        <p className="text-apple-gray-900 dark:text-white">
                           {info.value}
                         </p>
                       )}
@@ -139,7 +139,7 @@ export default function Contact() {
                 ))}
               </div>
 
-              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+              <h3 className="text-3xl font-semibold mb-8 text-apple-gray-900 dark:text-white">
                 {t('contact.connect')}
               </h3>
               
@@ -154,8 +154,8 @@ export default function Contact() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    whileHover={{ scale: 1.1 }}
-                    className="w-14 h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    className="w-14 h-14 rounded-full bg-apple-gray-100 dark:bg-apple-gray-800 text-apple-gray-900 dark:text-white flex items-center justify-center hover:bg-apple-gray-200 dark:hover:bg-apple-gray-700 transition-all duration-200"
                   >
                     {social.icon}
                   </motion.a>
@@ -166,10 +166,10 @@ export default function Contact() {
             {/* Contact Form */}
             <div>
               <form onSubmit={handleSubmit} className="card">
-                <div className="mb-4">
+                <div className="mb-6">
                   <label
                     htmlFor="name"
-                    className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white"
+                    className="block text-sm font-medium mb-2 text-apple-gray-900 dark:text-white"
                   >
                     {t('contact.name')}
                   </label>
@@ -180,14 +180,14 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-apple-gray-800 text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-gray-400 dark:focus:ring-apple-gray-600"
                   />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-6">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white"
+                    className="block text-sm font-medium mb-2 text-apple-gray-900 dark:text-white"
                   >
                     {t('contact.email')}
                   </label>
@@ -198,14 +198,14 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-apple-gray-800 text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-gray-400 dark:focus:ring-apple-gray-600"
                   />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-6">
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white"
+                    className="block text-sm font-medium mb-2 text-apple-gray-900 dark:text-white"
                   >
                     {t('contact.subject')}
                   </label>
@@ -216,14 +216,14 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-apple-gray-800 text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-gray-400 dark:focus:ring-apple-gray-600"
                   />
                 </div>
 
-                <div className="mb-6">
+                <div className="mb-8">
                   <label
                     htmlFor="message"
-                    className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white"
+                    className="block text-sm font-medium mb-2 text-apple-gray-900 dark:text-white"
                   >
                     {t('contact.message')}
                   </label>
@@ -234,7 +234,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-apple-gray-800 text-apple-gray-900 dark:text-white resize-none focus:outline-none focus:ring-2 focus:ring-apple-gray-400 dark:focus:ring-apple-gray-600"
                   />
                 </div>
 

@@ -21,59 +21,59 @@ const translations = {
     'nav.contact': 'Contact',
     
     // Hero
-    'hero.greeting': 'Hi, I\'m',
+    'hero.greeting': 'Hey there! I\'m',
     'hero.name': 'Darren Fong',
     'hero.title': 'Student | Developer | Problem Solver',
-    'hero.description': 'Passionate about technology, competitive programming, and making a difference through innovation.',
-    'hero.viewWork': 'View My Work',
-    'hero.getInTouch': 'Get In Touch',
+    'hero.description': 'I love building things with code and solving interesting problems.',
+    'hero.viewWork': 'Check Out My Work',
+    'hero.getInTouch': 'Let\'s Talk',
     
     // About
     'about.title': 'About Me',
-    'about.intro': 'I\'m a dedicated student with a passion for technology and innovation. My journey in the world of technology has been driven by curiosity and a desire to create meaningful solutions to real-world problems.',
-    'about.journey': 'Throughout my academic journey, I\'ve participated in various competitions, earned certifications, and worked on diverse projects that have helped me develop both technical and soft skills. I\'m constantly learning and exploring new technologies to expand my knowledge and capabilities.',
-    'about.beyond': 'Beyond academics, I\'m actively involved in organizations and initiatives that align with my interests and values. I believe in continuous growth, collaboration, and making a positive impact in my community.',
+    'about.intro': 'I\'m a student who loves technology and building cool stuff. I got into coding because I wanted to create solutions that actually help people.',
+    'about.journey': 'I\'ve competed in hackathons, built various projects, and picked up new skills along the way. Every project teaches me something new, and I\'m always looking for the next challenge.',
+    'about.beyond': 'Outside of classes, I\'m involved in tech communities and organizations where I can learn from others and contribute. I believe in sharing knowledge and helping others grow.',
     
     // Projects
-    'projects.title': 'GitHub Projects',
-    'projects.subtitle': 'Here are some of my recent projects showcasing my skills in various technologies and domains.',
-    'projects.code': 'Code',
-    'projects.live': 'Live Demo',
+    'projects.title': 'My Projects',
+    'projects.subtitle': 'Some things I\'ve built recently.',
+    'projects.code': 'View Code',
+    'projects.live': 'See It Live',
     
     // Competitions
     'competitions.title': 'Competitions & Awards',
-    'competitions.subtitle': 'Recognition and achievements from various academic and extracurricular competitions.',
+    'competitions.subtitle': 'Highlights from competitions and challenges I\'ve participated in.',
     
     // Education
-    'education.title': 'Education & Certifications',
-    'education.subtitle': 'My academic journey and professional certifications.',
+    'education.title': 'Education',
+    'education.subtitle': 'Where I\'ve studied and what I\'ve learned.',
     'education.education': 'Education',
-    'education.certifications': 'Licenses & Certifications',
+    'education.certifications': 'Certifications',
     
     // Skills
-    'skills.title': 'Skills & Technologies',
-    'skills.subtitle': 'Technologies and tools I work with to build amazing projects.',
+    'skills.title': 'What I Work With',
+    'skills.subtitle': 'Technologies and tools I use regularly.',
     
     // Organisations
-    'organizations.title': 'Organisations & Experience',
-    'organizations.subtitle': 'My involvement in various organisations and the experiences I\'ve gained.',
-    'organizations.school': 'School Leadership',
-    'organizations.clubs': 'Clubs & Societies',
-    'organizations.external': 'External Organisations',
-    'organizations.achievements': 'Key Achievements:',
+    'organizations.title': 'Experience & Involvement',
+    'organizations.subtitle': 'Organizations and communities I\'m part of.',
+    'organizations.school': 'School',
+    'organizations.clubs': 'Clubs',
+    'organizations.external': 'Organizations',
+    'organizations.achievements': 'Highlights:',
     
     // Contact
     'contact.title': 'Get In Touch',
-    'contact.subtitle': 'Have a question or want to work together? Feel free to reach out!',
-    'contact.info': 'Contact Information',
-    'contact.connect': 'Connect With Me',
+    'contact.subtitle': 'Want to chat? Drop me a message!',
+    'contact.info': 'Contact Info',
+    'contact.connect': 'Connect',
     'contact.name': 'Name',
     'contact.email': 'Email',
     'contact.subject': 'Subject',
     'contact.message': 'Message',
-    'contact.send': 'Send Message',
+    'contact.send': 'Send',
     'contact.sending': 'Sending...',
-    'contact.success': 'Message sent successfully! I\'ll get back to you soon.',
+    'contact.success': 'Thanks! I\'ll get back to you soon.',
     'contact.emailLabel': 'Email',
     'contact.phone': 'Phone',
     'contact.location': 'Location',

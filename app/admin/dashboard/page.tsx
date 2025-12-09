@@ -106,7 +106,7 @@ export default function AdminDashboard() {
             <Link
               key={index}
               href={section.href}
-              className="card hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              className="card transition-all duration-300 hover:scale-105"
             >
               <div className={`${section.color} w-16 h-16 rounded-lg flex items-center justify-center text-white mb-4`}>
                 {section.icon}

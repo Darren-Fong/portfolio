@@ -35,7 +35,7 @@ export default function Projects() {
   const projects: Project[] = (data && Array.isArray(data)) ? data : []
 
   return (
-    <section className="section-padding bg-gray-50 dark:bg-gray-800 pt-24">
+    <section className="section-padding bg-white dark:bg-black pt-24">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,10 +43,10 @@ export default function Projects() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-5xl font-semibold text-center mb-6 text-apple-gray-900 dark:text-white tracking-tight">
             {t('projects.title')}
           </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-apple-gray-600 dark:text-apple-gray-400 mb-16 max-w-2xl mx-auto text-xl font-light">
             {t('projects.subtitle')}
           </p>
           
@@ -58,18 +58,18 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card h-full flex flex-col hover:scale-105 transition-transform duration-300"
+                className="card h-full flex flex-col hover:scale-[1.02] transition-transform duration-300"
               >
                 {/* Project Image Placeholder */}
-                <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center">
+                <div className="w-full h-48 bg-apple-gray-100 dark:bg-apple-gray-800 rounded-xl mb-6 flex items-center justify-center">
                   <span className="text-6xl">🚀</span>
                 </div>
 
-                <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-semibold mb-3 text-apple-gray-900 dark:text-white">
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-700 dark:text-gray-300 mb-4 flex-grow">
+                <p className="text-apple-gray-600 dark:text-apple-gray-400 mb-4 flex-grow font-light">
                   {project.description}
                 </p>
                 
@@ -78,7 +78,7 @@ export default function Projects() {
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full"
+                        className="px-3 py-1 bg-apple-gray-100 dark:bg-apple-gray-800 text-apple-gray-900 dark:text-apple-gray-100 text-sm rounded-full"
                       >
                         {tech}
                       </span>
@@ -88,7 +88,7 @@ export default function Projects() {
 
                 {/* Stats */}
                 {(project.stars || project.forks) && (
-                  <div className="flex gap-4 mb-4 text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex gap-4 mb-4 text-sm text-apple-gray-600 dark:text-apple-gray-400">
                     {project.stars && (
                       <div className="flex items-center gap-1">
                         <FaStar className="text-yellow-500" />

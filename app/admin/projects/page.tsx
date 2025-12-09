@@ -192,7 +192,7 @@ export default function AdminProjects() {
             <button
               type="submit"
               disabled={saving}
-              className="btn-primary shadow-lg flex items-center gap-2 px-6 py-3 rounded-full"
+              className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full"
             >
               <FaSave /> {saving ? 'Saving...' : 'Save Changes'}
             </button>

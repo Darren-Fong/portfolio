@@ -25,21 +25,21 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="fixed w-full bg-white dark:bg-gray-900 shadow-md z-50">
+    <nav className="fixed w-full bg-white/80 dark:bg-black/80 backdrop-blur-xl z-50">
       <div className="container-custom">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold text-primary">
+          <Link href="/" className="text-2xl font-semibold text-apple-gray-900 dark:text-white tracking-tight">
             Portfolio
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-gray-700 dark:text-gray-300 hover:text-primary transition-colors duration-300 ${
-                  pathname === item.href ? 'text-primary font-semibold' : ''
+                className={`text-sm text-apple-gray-600 dark:text-apple-gray-300 hover:text-apple-gray-900 dark:hover:text-white transition-colors duration-200 ${
+                  pathname === item.href ? 'text-apple-gray-900 dark:text-white font-medium' : ''
                 }`}
               >
                 {item.name}
@@ -50,13 +50,13 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="p-2 rounded-full hover:bg-apple-gray-100 dark:hover:bg-apple-gray-800 transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === 'light' ? (
-                  <FaMoon className="text-gray-700 dark:text-gray-300" size={20} />
+                  <FaMoon className="text-apple-gray-600 dark:text-apple-gray-300" size={18} />
                 ) : (
-                  <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
+                  <FaSun className="text-apple-gray-600 dark:text-apple-gray-300" size={18} />
                 )}
               </button>
             )}
@@ -67,20 +67,20 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="p-2 rounded-full hover:bg-apple-gray-100 dark:hover:bg-apple-gray-800 transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === 'light' ? (
-                  <FaMoon className="text-gray-700 dark:text-gray-300" size={20} />
+                  <FaMoon className="text-apple-gray-600 dark:text-apple-gray-300" size={18} />
                 ) : (
-                  <FaSun className="text-gray-700 dark:text-gray-300" size={20} />
+                  <FaSun className="text-apple-gray-600 dark:text-apple-gray-300" size={18} />
                 )}
               </button>
             )}
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 dark:text-gray-300"
+              className="text-apple-gray-600 dark:text-apple-gray-300"
             >
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
@@ -94,8 +94,8 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`block py-2 text-gray-700 dark:text-gray-300 hover:text-primary transition-colors duration-300 ${
-                  pathname === item.href ? 'text-primary font-semibold' : ''
+                className={`block py-3 text-sm text-apple-gray-600 dark:text-apple-gray-300 hover:text-apple-gray-900 dark:hover:text-white transition-colors duration-200 ${
+                  pathname === item.href ? 'text-apple-gray-900 dark:text-white font-medium' : ''
                 }`}
                 onClick={() => setIsOpen(false)}
               >

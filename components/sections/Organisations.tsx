@@ -43,7 +43,7 @@ export default function Organisations() {
     
     return (
       <div className="mb-12 last:mb-0">
-        <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
+        <h3 className="text-3xl font-semibold mb-8 text-apple-gray-900 dark:text-white flex items-center gap-3">
           {icon}
           {title}
         </h3>
@@ -59,30 +59,30 @@ export default function Organisations() {
               className="card"
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                <h4 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h4 className="text-xl font-semibold text-apple-gray-900 dark:text-white">
                   {org.name}
                 </h4>
-                <span className="text-sm text-gray-500 dark:text-gray-400">
+                <span className="text-sm text-apple-gray-500 dark:text-apple-gray-500 font-light">
                   {org.period}
                 </span>
               </div>
               
-              <p className="text-lg text-primary font-semibold mb-3">
+              <p className="text-lg text-apple-gray-700 dark:text-apple-gray-300 font-medium mb-3">
                 {org.role}
               </p>
               
-              <p className="text-gray-700 dark:text-gray-300 mb-4">
+              <p className="text-apple-gray-600 dark:text-apple-gray-400 mb-4 font-light">
                 {org.description}
               </p>
               
               {org.achievements && org.achievements.length > 0 && (
                 <div>
-                  <p className="font-semibold text-gray-900 dark:text-white mb-2">
+                  <p className="font-medium text-apple-gray-900 dark:text-white mb-2">
                     Key Achievements:
                   </p>
                   <ul className="list-disc list-inside space-y-1">
                     {org.achievements.map((achievement, achIndex) => (
-                      <li key={achIndex} className="text-gray-700 dark:text-gray-300">
+                      <li key={achIndex} className="text-apple-gray-600 dark:text-apple-gray-400 font-light">
                         {achievement}
                       </li>
                     ))}
@@ -97,7 +97,7 @@ export default function Organisations() {
   }
 
   return (
-    <section id="organisations" className="section-padding bg-gray-50 dark:bg-gray-800">
+    <section id="organisations" className="section-padding bg-apple-gray-50 dark:bg-apple-gray-900">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -105,16 +105,16 @@ export default function Organisations() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-5xl font-semibold text-center mb-6 text-apple-gray-900 dark:text-white tracking-tight">
             Organisations & Experience
           </h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-apple-gray-600 dark:text-apple-gray-400 mb-16 max-w-2xl mx-auto text-xl font-light">
             My involvement in various organisations and the experiences I've gained.
           </p>
           
-          {renderOrganisations(schoolOrgs, 'School Leadership', <FaSchool className="text-primary" />)}
-          {renderOrganisations(clubOrgs, 'Clubs & Societies', <FaUsers className="text-secondary" />)}
-          {renderOrganisations(externalOrgs, 'External Organisations', <FaBriefcase className="text-primary" />)}
+          {renderOrganisations(schoolOrgs, 'School Leadership', <FaSchool className="text-apple-gray-600 dark:text-apple-gray-400" />)}
+          {renderOrganisations(clubOrgs, 'Clubs & Societies', <FaUsers className="text-apple-gray-600 dark:text-apple-gray-400" />)}
+          {renderOrganisations(externalOrgs, 'External Organisations', <FaBriefcase className="text-apple-gray-600 dark:text-apple-gray-400" />)}
         </motion.div>
       </div>
     </section>

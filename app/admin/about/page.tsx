@@ -6,13 +6,14 @@ import { useAdmin } from '@/context/AdminContext'
 import { usePortfolioData } from '@/hooks/usePortfolioData'
 import Link from 'next/link'
 import { FaArrowLeft, FaSave } from 'react-icons/fa'
+import ImageCropper from '@/components/ImageCropper'
 
 export default function AdminAbout() {
   const { isAuthenticated } = useAdmin()
   const router = useRouter()
   const { data, loading, saveData } = usePortfolioData('about')
   const [saving, setSaving] = useState(false)
-  const [uploading, setUploading] = useState(false)
+  const [showCropper, setShowCropper] = useState(false)
   const [formData, setFormData] = useState({
     intro: '',
     journey: '',
@@ -60,29 +61,9 @@ export default function AdminAbout() {
     })
   }
 
-  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    setUploading(true)
-    try {
-      const formData = new FormData()
-      formData.append('file', file)
-
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (!response.ok) throw new Error('Upload failed')
-
-      const { url } = await response.json()
-      setFormData(prev => ({ ...prev, photoUrl: url }))
-    } catch (error) {
-      alert('Failed to upload photo. Please try again.')
-    } finally {
-      setUploading(false)
-    }
+  const handleCropComplete = (croppedImageUrl: string) => {
+    setFormData(prev => ({ ...prev, photoUrl: croppedImageUrl }))
+    setShowCropper(false)
   }
 
   if (loading) {
@@ -115,19 +96,13 @@ export default function AdminAbout() {
             </h2>
             
             <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                Upload Photo
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handlePhotoUpload}
-                disabled={uploading}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-              />
-              {uploading && (
-                <p className="text-sm text-gray-500 mt-2">Uploading...</p>
-              )}
+              <button
+                type="button"
+                onClick={() => setShowCropper(true)}
+                className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                Upload & Crop Photo
+              </button>
             </div>
 
             {formData.photoUrl && (
@@ -213,6 +188,13 @@ export default function AdminAbout() {
             {saving ? 'Saving...' : 'Save Changes'}
           </button>
         </form>
+
+        {showCropper && (
+          <ImageCropper
+            onCropComplete={handleCropComplete}
+            onCancel={() => setShowCropper(false)}
+          />
+        )}
       </div>
     </div>
   )
