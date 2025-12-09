@@ -15,7 +15,7 @@ const translations = {
     'nav.about': 'About',
     'nav.projects': 'Projects',
     'nav.competitions': 'Competitions',
-    'nav.education': 'Education',
+    'nav.education': 'Certification',
     'nav.skills': 'Skills',
     'nav.organisations': 'Organisations',
     'nav.contact': 'Contact',
