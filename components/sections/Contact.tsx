@@ -7,7 +7,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { usePortfolioData } from '@/hooks/usePortfolioData'
 
 export default function Contact() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const { data, loading } = usePortfolioData('contact')
   const [formData, setFormData] = useState({
     name: '',
@@ -64,7 +64,7 @@ export default function Contact() {
     {
       icon: <FaMapMarkerAlt />,
       label: t('contact.location'),
-      value: (language === 'zh' ? data?.locationZh : data?.location) || data?.location || '',
+      value: data?.location || '',
       href: null,
     },
   ].filter(item => item.value) // Only show items with values

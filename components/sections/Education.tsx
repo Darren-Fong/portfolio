@@ -15,7 +15,7 @@ interface EducationItem {
 }
 
 export default function Education() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const { data, loading } = usePortfolioData('education')
 
   if (loading) {
@@ -31,10 +31,10 @@ export default function Education() {
   // Convert single admin entry to array item if it exists
   const education: EducationItem[] = (data && Object.keys(data).length > 0) ? [{
     type: 'education',
-    institution: (language === 'zh' ? data.schoolZh : data.school) || data.school,
-    degree: (language === 'zh' ? data.degreeZh : data.degree) || data.degree,
-    year: (language === 'zh' ? data.periodZh : data.period) || data.period,
-    details: (language === 'zh' ? data.descriptionZh : data.description) || data.description,
+    institution: data.school,
+    degree: data.degree,
+    year: data.period,
+    details: data.description,
   }] : []
 
   // Currently admin doesn't support certifications, so we leave it empty or static

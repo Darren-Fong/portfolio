@@ -6,19 +6,19 @@ import { usePortfolioData } from '@/hooks/usePortfolioData'
 import Image from 'next/image'
 
 export default function About() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const { data, loading } = usePortfolioData('about')
 
   const intro = (data && Object.keys(data).length > 0)
-    ? (language === 'en' ? data.intro : data.introZh) || t('about.intro')
+    ? data.intro || t('about.intro')
     : t('about.intro')
   
   const journey = (data && Object.keys(data).length > 0)
-    ? (language === 'en' ? data.journey : data.journeyZh) || t('about.journey')
+    ? data.journey || t('about.journey')
     : t('about.journey')
     
   const beyond = (data && Object.keys(data).length > 0)
-    ? (language === 'en' ? data.beyond : data.beyondZh) || t('about.beyond')
+    ? data.beyond || t('about.beyond')
     : t('about.beyond')
 
   if (loading) {

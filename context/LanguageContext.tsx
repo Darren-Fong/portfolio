@@ -1,12 +1,8 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-
-type Language = 'en' | 'zh'
+import { createContext, useContext, ReactNode } from 'react'
 
 interface LanguageContextType {
-  language: Language
-  setLanguage: (lang: Language) => void
   t: (key: string) => string
 }
 
@@ -85,101 +81,15 @@ const translations = {
     // Footer
     'footer.rights': 'All rights reserved.',
   },
-  zh: {
-    // Navigation
-    'nav.home': '首頁',
-    'nav.about': '關於我',
-    'nav.projects': '專案',
-    'nav.competitions': '競賽',
-    'nav.education': '教育',
-    'nav.skills': '技能',
-    'nav.organisations': '組織',
-    'nav.contact': '聯絡',
-    
-    // Hero
-    'hero.greeting': '你好，我是',
-    'hero.name': '方子維',
-    'hero.title': '學生 | 開發者 | 問題解決者',
-    'hero.description': '熱衷於科技、競賽程式設計，並透過創新帶來改變。',
-    'hero.viewWork': '查看作品',
-    'hero.getInTouch': '聯絡我',
-    
-    // About
-    'about.title': '關於我',
-    'about.intro': '我是一名充滿熱情的學生，對科技和創新充滿熱愛。我在科技領域的旅程源於好奇心，以及創造有意義解決方案的渴望。',
-    'about.journey': '在學術旅程中，我參加了各種競賽，獲得了認證，並參與了多元化的專案，這些經歷幫助我發展了技術和軟技能。我不斷學習和探索新技術，以擴展我的知識和能力。',
-    'about.beyond': '除了學術之外，我積極參與符合我興趣和價值觀的組織和倡議。我相信持續成長、協作，並在社區中產生積極影響。',
-    
-    // Projects
-    'projects.title': 'GitHub 專案',
-    'projects.subtitle': '以下是我最近的一些專案，展示了我在各種技術和領域的技能。',
-    'projects.code': '程式碼',
-    'projects.live': '線上展示',
-    
-    // Competitions
-    'competitions.title': '競賽與獎項',
-    'competitions.subtitle': '來自各種學術和課外競賽的認可和成就。',
-    
-    // Education
-    'education.title': '教育與認證',
-    'education.subtitle': '我的學術歷程和專業認證。',
-    'education.education': '教育背景',
-    'education.certifications': '執照與認證',
-    
-    // Skills
-    'skills.title': '技能與技術',
-    'skills.subtitle': '我用來構建出色專案的技術和工具。',
-    
-    // Organizations
-    'organizations.title': '組織與經驗',
-    'organizations.subtitle': '我在各種組織中的參與以及所獲得的經驗。',
-    'organizations.school': '學校領導',
-    'organizations.clubs': '社團',
-    'organizations.external': '校外組織',
-    'organizations.achievements': '主要成就：',
-    
-    // Contact
-    'contact.title': '聯絡我',
-    'contact.subtitle': '有問題或想合作？歡迎與我聯絡！',
-    'contact.info': '聯絡資訊',
-    'contact.connect': '與我聯繫',
-    'contact.name': '姓名',
-    'contact.email': '電子郵件',
-    'contact.subject': '主旨',
-    'contact.message': '訊息',
-    'contact.send': '發送訊息',
-    'contact.sending': '發送中...',
-    'contact.success': '訊息發送成功！我會盡快回覆您。',
-    'contact.emailLabel': '電子郵件',
-    'contact.phone': '電話',
-    'contact.location': '地點',
-    
-    // Footer
-    'footer.rights': '版權所有。',
-  },
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('en')
-
-  useEffect(() => {
-    const saved = localStorage.getItem('language') as Language
-    if (saved && (saved === 'en' || saved === 'zh')) {
-      setLanguageState(saved)
-    }
-  }, [])
-
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang)
-    localStorage.setItem('language', lang)
-  }
-
   const t = (key: string): string => {
-    return translations[language][key as keyof typeof translations['en']] || key
+    return translations['en'][key as keyof typeof translations['en']] || key
   }
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ t }}>
       {children}
     </LanguageContext.Provider>
   )

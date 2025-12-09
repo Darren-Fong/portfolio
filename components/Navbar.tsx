@@ -10,7 +10,7 @@ import { useTheme } from '@/context/ThemeContext'
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
-  const { language, setLanguage, t } = useLanguage()
+  const { t } = useLanguage()
   const { theme, toggleTheme, mounted } = useTheme()
 
   const navItems = [
@@ -29,7 +29,7 @@ export default function Navbar() {
       <div className="container-custom">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-2xl font-bold text-primary">
-            {language === 'en' ? 'Portfolio' : '作品集'}
+            Portfolio
           </Link>
 
           {/* Desktop Navigation */}
@@ -60,14 +60,6 @@ export default function Navbar() {
                 )}
               </button>
             )}
-
-            {/* Language Toggle */}
-            <button
-              onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
-              className="px-3 py-1 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
-            >
-              {language === 'en' ? '中文' : 'EN'}
-            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -85,13 +77,6 @@ export default function Navbar() {
                 )}
               </button>
             )}
-
-            <button
-              onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
-              className="px-3 py-1 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300 font-semibold text-sm"
-            >
-              {language === 'en' ? '中文' : 'EN'}
-            </button>
 
             <button
               onClick={() => setIsOpen(!isOpen)}

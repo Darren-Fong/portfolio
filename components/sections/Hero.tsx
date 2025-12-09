@@ -7,18 +7,18 @@ import { useLanguage } from '@/context/LanguageContext'
 import { usePortfolioData } from '@/hooks/usePortfolioData'
 
 export default function Hero() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const { data, loading } = usePortfolioData('hero')
   
   // Use saved data if available, otherwise use translations
   const name = (data && Object.keys(data).length > 0) 
-    ? (language === 'en' ? data.name : data.nameZh) || t('hero.name')
+    ? data.name || t('hero.name')
     : t('hero.name')
   const title = (data && Object.keys(data).length > 0)
-    ? (language === 'en' ? data.title : data.titleZh) || t('hero.title')
+    ? data.title || t('hero.title')
     : t('hero.title')
   const description = (data && Object.keys(data).length > 0)
-    ? (language === 'en' ? data.description : data.descriptionZh) || t('hero.description')
+    ? data.description || t('hero.description')
     : t('hero.description')
 
   if (loading) {

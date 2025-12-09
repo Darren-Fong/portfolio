@@ -7,7 +7,7 @@ import { competitionsData } from '@/data/competitions'
 import { usePortfolioData } from '@/hooks/usePortfolioData'
 
 export default function Competitions() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const { data, loading } = usePortfolioData('competitions')
   
   if (loading) {
@@ -26,17 +26,17 @@ export default function Competitions() {
     if (Array.isArray(data)) {
       // New structure (merged languages)
       categories = data.map((cat: any) => ({
-        category: language === 'zh' ? (cat.categoryZh || cat.category) : cat.category,
+        category: cat.category,
         items: cat.items.map((item: any) => ({
-          name: language === 'zh' ? (item.nameZh || item.name) : item.name,
+          name: item.name,
           year: item.year,
-          award: language === 'zh' ? (item.awardZh || item.award) : item.award,
-          description: language === 'zh' ? (item.descriptionZh || item.description) : item.description,
+          award: item.award,
+          description: item.description,
         }))
       }))
-    } else if (data[language]) {
+    } else if (data['en']) {
       // Old structure (separated languages)
-      categories = data[language]
+      categories = data['en']
     }
   }
 

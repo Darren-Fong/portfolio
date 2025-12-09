@@ -19,7 +19,7 @@ interface Project {
 }
 
 export default function Projects() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const { data, loading } = usePortfolioData('projects')
 
   if (loading) {
@@ -66,11 +66,11 @@ export default function Projects() {
                 </div>
 
                 <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
-                  {language === 'en' ? project.title : project.titleZh}
+                  {project.title}
                 </h3>
                 
                 <p className="text-gray-700 dark:text-gray-300 mb-4 flex-grow">
-                  {language === 'en' ? project.description : project.descriptionZh}
+                  {project.description}
                 </p>
                 
                 <div className="mb-4">

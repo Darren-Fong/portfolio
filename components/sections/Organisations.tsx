@@ -19,7 +19,7 @@ interface Organisation {
 }
 
 export default function Organisations() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const { data, loading } = usePortfolioData('organisations')
 
   if (loading) {
@@ -60,7 +60,7 @@ export default function Organisations() {
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
                 <h4 className="text-xl font-bold text-gray-900 dark:text-white">
-                  {language === 'zh' ? (org.nameZh || org.name) : org.name}
+                  {org.name}
                 </h4>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
                   {org.period}
@@ -68,20 +68,20 @@ export default function Organisations() {
               </div>
               
               <p className="text-lg text-primary font-semibold mb-3">
-                {language === 'zh' ? (org.roleZh || org.role) : org.role}
+                {org.role}
               </p>
               
               <p className="text-gray-700 dark:text-gray-300 mb-4">
-                {language === 'zh' ? (org.descriptionZh || org.description) : org.description}
+                {org.description}
               </p>
               
-              {((language === 'zh' ? org.achievementsZh : org.achievements) || org.achievements) && ((language === 'zh' ? org.achievementsZh : org.achievements) || org.achievements)!.length > 0 && (
+              {org.achievements && org.achievements.length > 0 && (
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white mb-2">
-                    {language === 'zh' ? '主要成就：' : 'Key Achievements:'}
+                    Key Achievements:
                   </p>
                   <ul className="list-disc list-inside space-y-1">
-                    {((language === 'zh' ? org.achievementsZh : org.achievements) || org.achievements)!.map((achievement, achIndex) => (
+                    {org.achievements.map((achievement, achIndex) => (
                       <li key={achIndex} className="text-gray-700 dark:text-gray-300">
                         {achievement}
                       </li>
