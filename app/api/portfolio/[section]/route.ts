@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { put, head, del } from '@vercel/blob'
+import { put, list, del } from '@vercel/blob'
 
 const BLOB_KEY = 'portfolio-data.json'
 
 // Helper to get all data
 async function getAllData() {
   try {
-    const blobInfo = await head(BLOB_KEY).catch(() => null)
+    const { blobs } = await list()
+    const blobInfo = blobs.find(b => b.pathname === BLOB_KEY)
+    
     if (!blobInfo) return {}
     
     const response = await fetch(`${blobInfo.url}?t=${Date.now()}`, {
@@ -46,7 +48,8 @@ export async function POST(
     
     // Delete old blob
     try {
-      const oldBlob = await head(BLOB_KEY).catch(() => null)
+      const { blobs } = await list()
+      const oldBlob = blobs.find(b => b.pathname === BLOB_KEY)
       if (oldBlob) await del(oldBlob.url)
     } catch (e) {}
     
