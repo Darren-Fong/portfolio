@@ -10,14 +10,10 @@ import { FaArrowLeft, FaPlus, FaTrash, FaChevronDown, FaChevronUp, FaSave } from
 interface Organisation {
   type: 'school' | 'club' | 'external'
   name: string
-  nameZh: string
   role: string
-  roleZh: string
   period: string
   description: string
-  descriptionZh: string
   achievements: string[]
-  achievementsZh: string[]
 }
 
 export default function AdminOrganisations() {
@@ -59,11 +55,11 @@ export default function AdminOrganisations() {
       ...organisations,
       {
         type: 'school',
-        name: '', nameZh: '',
-        role: '', roleZh: '',
+        name: '',
+        role: '',
         period: '',
-        description: '', descriptionZh: '',
-        achievements: [], achievementsZh: []
+        description: '',
+        achievements: []
       }
     ])
     setExpandedIndex(organisations.length)
@@ -82,9 +78,9 @@ export default function AdminOrganisations() {
     setOrganisations(newOrgs)
   }
 
-  const updateAchievements = (index: number, field: 'achievements' | 'achievementsZh', value: string) => {
+  const updateAchievements = (index: number, value: string) => {
     const list = value.split('\n').map(item => item.trim()).filter(item => item)
-    updateOrganisation(index, field, list)
+    updateOrganisation(index, 'achievements', list)
   }
 
   if (loading) return <div className="p-8 text-center">Loading...</div>
@@ -145,46 +141,24 @@ export default function AdminOrganisations() {
                     </select>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Name (EN)</label>
-                      <input
-                        type="text"
-                        value={org.name}
-                        onChange={(e) => updateOrganisation(index, 'name', e.target.value)}
-                        className="input-field w-full"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Name (ZH)</label>
-                      <input
-                        type="text"
-                        value={org.nameZh}
-                        onChange={(e) => updateOrganisation(index, 'nameZh', e.target.value)}
-                        className="input-field w-full"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Name</label>
+                    <input
+                      type="text"
+                      value={org.name}
+                      onChange={(e) => updateOrganisation(index, 'name', e.target.value)}
+                      className="input-field w-full"
+                    />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Role (EN)</label>
-                      <input
-                        type="text"
-                        value={org.role}
-                        onChange={(e) => updateOrganisation(index, 'role', e.target.value)}
-                        className="input-field w-full"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Role (ZH)</label>
-                      <input
-                        type="text"
-                        value={org.roleZh}
-                        onChange={(e) => updateOrganisation(index, 'roleZh', e.target.value)}
-                        className="input-field w-full"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Role</label>
+                    <input
+                      type="text"
+                      value={org.role}
+                      onChange={(e) => updateOrganisation(index, 'role', e.target.value)}
+                      className="input-field w-full"
+                    />
                   </div>
 
                   <div>
@@ -198,44 +172,23 @@ export default function AdminOrganisations() {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Description (EN)</label>
-                      <textarea
-                        value={org.description}
-                        onChange={(e) => updateOrganisation(index, 'description', e.target.value)}
-                        className="input-field w-full h-24"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Description (ZH)</label>
-                      <textarea
-                        value={org.descriptionZh}
-                        onChange={(e) => updateOrganisation(index, 'descriptionZh', e.target.value)}
-                        className="input-field w-full h-24"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Description</label>
+                    <textarea
+                      value={org.description}
+                      onChange={(e) => updateOrganisation(index, 'description', e.target.value)}
+                      className="input-field w-full h-24"
+                    />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Achievements (EN) - One per line</label>
-                      <textarea
-                        value={org.achievements.join('\n')}
-                        onChange={(e) => updateAchievements(index, 'achievements', e.target.value)}
-                        className="input-field w-full h-32"
-                        placeholder="Achievement 1&#10;Achievement 2"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Achievements (ZH) - One per line</label>
-                      <textarea
-                        value={org.achievementsZh.join('\n')}
-                        onChange={(e) => updateAchievements(index, 'achievementsZh', e.target.value)}
-                        className="input-field w-full h-32"
-                        placeholder="成就 1&#10;成就 2"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Achievements - One per line</label>
+                    <textarea
+                      value={org.achievements.join('\n')}
+                      onChange={(e) => updateAchievements(index, e.target.value)}
+                      className="input-field w-full h-32"
+                      placeholder="Achievement 1&#10;Achievement 2"
+                    />
                   </div>
                 </div>
               )}

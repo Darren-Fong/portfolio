@@ -54,9 +54,19 @@ export default function About() {
               className="flex justify-center"
             >
               <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-primary shadow-2xl">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                  <span className="text-6xl">👨‍💻</span>
-                </div>
+                {data?.photoUrl ? (
+                  <Image
+                    src={data.photoUrl}
+                    alt="Profile Photo"
+                    fill
+                    className="object-cover"
+                    sizes="320px"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                    <span className="text-6xl">👨‍💻</span>
+                  </div>
+                )}
               </div>
             </motion.div>
 

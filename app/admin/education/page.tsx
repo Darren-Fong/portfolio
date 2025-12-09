@@ -14,13 +14,9 @@ export default function AdminEducation() {
   const [saving, setSaving] = useState(false)
   const [formData, setFormData] = useState({
     school: '',
-    schoolZh: '',
     degree: '',
-    degreeZh: '',
     period: '',
-    periodZh: '',
     description: '',
-    descriptionZh: '',
   })
 
   useEffect(() => {
@@ -31,13 +27,9 @@ export default function AdminEducation() {
     if (data && Object.keys(data).length > 0) {
       setFormData({
         school: data.school || '',
-        schoolZh: data.schoolZh || '',
         degree: data.degree || '',
-        degreeZh: data.degreeZh || '',
         period: data.period || '',
-        periodZh: data.periodZh || '',
         description: data.description || '',
-        descriptionZh: data.descriptionZh || '',
       })
     }
   }, [data])
@@ -82,47 +74,24 @@ export default function AdminEducation() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="card space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">School (EN)</label>
-                <input type="text" name="school" value={formData.school} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">School (ZH)</label>
-                <input type="text" name="schoolZh" value={formData.schoolZh} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Degree (EN)</label>
-                <input type="text" name="degree" value={formData.degree} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Degree (ZH)</label>
-                <input type="text" name="degreeZh" value={formData.degreeZh} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Period (EN)</label>
-                <input type="text" name="period" value={formData.period} onChange={handleChange} placeholder="2020 - 2024" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Period (ZH)</label>
-                <input type="text" name="periodZh" value={formData.periodZh} onChange={handleChange} placeholder="2020 - 2024" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
-              </div>
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">School</label>
+              <input type="text" name="school" value={formData.school} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Description (EN)</label>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Degree</label>
+              <input type="text" name="degree" value={formData.degree} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Period</label>
+              <input type="text" name="period" value={formData.period} onChange={handleChange} placeholder="2020 - 2024" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Description</label>
               <textarea name="description" value={formData.description} onChange={handleChange} rows={3} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none" />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Description (ZH)</label>
-              <textarea name="descriptionZh" value={formData.descriptionZh} onChange={handleChange} rows={3} className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none" />
             </div>
           </div>
 

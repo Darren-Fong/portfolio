@@ -9,17 +9,13 @@ import { FaArrowLeft, FaPlus, FaTrash, FaChevronDown, FaChevronUp, FaSave } from
 
 interface CompetitionItem {
   name: string
-  nameZh: string
   year: string
   award: string
-  awardZh: string
   description: string
-  descriptionZh: string
 }
 
 interface CompetitionCategory {
   category: string
-  categoryZh: string
   items: CompetitionItem[]
 }
 
@@ -40,19 +36,15 @@ export default function AdminCompetitions() {
       // Check if data is in the new format (array) or old format (object with en/zh)
       if (Array.isArray(data)) {
         setCategories(data)
-      } else if (data.en && data.zh) {
+      } else if (data.en) {
         // Convert old format to new format
-        const newCategories = data.en.map((cat: any, index: number) => ({
+        const newCategories = data.en.map((cat: any) => ({
           category: cat.category,
-          categoryZh: data.zh[index]?.category || '',
-          items: cat.items.map((item: any, itemIndex: number) => ({
+          items: cat.items.map((item: any) => ({
             name: item.name,
-            nameZh: data.zh[index]?.items[itemIndex]?.name || '',
             year: item.year,
             award: item.award,
-            awardZh: data.zh[index]?.items[itemIndex]?.award || '',
             description: item.description,
-            descriptionZh: data.zh[index]?.items[itemIndex]?.description || '',
           }))
         }))
         setCategories(newCategories)
@@ -77,7 +69,7 @@ export default function AdminCompetitions() {
   }
 
   const addCategory = () => {
-    setCategories([...categories, { category: '', categoryZh: '', items: [] }])
+    setCategories([...categories, { category: '', items: [] }])
     setExpandedCategory(categories.length)
   }
 
@@ -88,17 +80,17 @@ export default function AdminCompetitions() {
     }
   }
 
-  const updateCategory = (index: number, field: 'category' | 'categoryZh', value: string) => {
+  const updateCategory = (index: number, value: string) => {
     const newCategories = [...categories]
-    newCategories[index][field] = value
+    newCategories[index].category = value
     setCategories(newCategories)
   }
 
   const addItem = (categoryIndex: number) => {
     const newCategories = [...categories]
     newCategories[categoryIndex].items.push({
-      name: '', nameZh: '', year: new Date().getFullYear().toString(),
-      award: '', awardZh: '', description: '', descriptionZh: ''
+      name: '', year: new Date().getFullYear().toString(),
+      award: '', description: ''
     })
     setCategories(newCategories)
   }
@@ -139,20 +131,13 @@ export default function AdminCompetitions() {
           {categories.map((cat, catIndex) => (
             <div key={catIndex} className="card border-2 border-transparent hover:border-primary/20 transition-colors">
               <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
-                <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 mr-4">
+                <div className="flex-1 mr-4">
                   <input
                     type="text"
                     value={cat.category}
-                    onChange={(e) => updateCategory(catIndex, 'category', e.target.value)}
-                    className="input-field font-bold text-lg"
-                    placeholder="Category Name (English)"
-                  />
-                  <input
-                    type="text"
-                    value={cat.categoryZh}
-                    onChange={(e) => updateCategory(catIndex, 'categoryZh', e.target.value)}
-                    className="input-field font-bold text-lg"
-                    placeholder="類別名稱 (中文)"
+                    onChange={(e) => updateCategory(catIndex, e.target.value)}
+                    className="input-field font-bold text-lg w-full"
+                    placeholder="Category Name"
                   />
                 </div>
                 <div className="flex items-center gap-2">
@@ -187,7 +172,7 @@ export default function AdminCompetitions() {
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
-                          <label className="text-xs font-semibold text-gray-500 uppercase">Name (EN)</label>
+                          <label className="text-xs font-semibold text-gray-500 uppercase">Name</label>
                           <input
                             type="text"
                             value={item.name}
@@ -195,18 +180,6 @@ export default function AdminCompetitions() {
                             className="input-field w-full"
                           />
                         </div>
-                        <div>
-                          <label className="text-xs font-semibold text-gray-500 uppercase">Name (ZH)</label>
-                          <input
-                            type="text"
-                            value={item.nameZh}
-                            onChange={(e) => updateItem(catIndex, itemIndex, 'nameZh', e.target.value)}
-                            className="input-field w-full"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div>
                           <label className="text-xs font-semibold text-gray-500 uppercase">Year</label>
                           <input
@@ -216,43 +189,25 @@ export default function AdminCompetitions() {
                             className="input-field w-full"
                           />
                         </div>
-                        <div>
-                          <label className="text-xs font-semibold text-gray-500 uppercase">Award (EN)</label>
-                          <input
-                            type="text"
-                            value={item.award}
-                            onChange={(e) => updateItem(catIndex, itemIndex, 'award', e.target.value)}
-                            className="input-field w-full"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-xs font-semibold text-gray-500 uppercase">Award (ZH)</label>
-                          <input
-                            type="text"
-                            value={item.awardZh}
-                            onChange={(e) => updateItem(catIndex, itemIndex, 'awardZh', e.target.value)}
-                            className="input-field w-full"
-                          />
-                        </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-xs font-semibold text-gray-500 uppercase">Description (EN)</label>
-                          <textarea
-                            value={item.description}
-                            onChange={(e) => updateItem(catIndex, itemIndex, 'description', e.target.value)}
-                            className="input-field w-full h-20"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-xs font-semibold text-gray-500 uppercase">Description (ZH)</label>
-                          <textarea
-                            value={item.descriptionZh}
-                            onChange={(e) => updateItem(catIndex, itemIndex, 'descriptionZh', e.target.value)}
-                            className="input-field w-full h-20"
-                          />
-                        </div>
+                      <div className="mb-4">
+                        <label className="text-xs font-semibold text-gray-500 uppercase">Award</label>
+                        <input
+                          type="text"
+                          value={item.award}
+                          onChange={(e) => updateItem(catIndex, itemIndex, 'award', e.target.value)}
+                          className="input-field w-full"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-xs font-semibold text-gray-500 uppercase">Description</label>
+                        <textarea
+                          value={item.description}
+                          onChange={(e) => updateItem(catIndex, itemIndex, 'description', e.target.value)}
+                          className="input-field w-full h-20"
+                        />
                       </div>
                     </div>
                   ))}

@@ -16,7 +16,6 @@ export default function AdminContact() {
     email: '',
     phone: '',
     location: '',
-    locationZh: '',
     github: '',
     linkedin: '',
   })
@@ -31,7 +30,6 @@ export default function AdminContact() {
         email: data.email || '',
         phone: data.phone || '',
         location: data.location || '',
-        locationZh: data.locationZh || '',
         github: data.github || '',
         linkedin: data.linkedin || '',
       })
@@ -88,16 +86,9 @@ export default function AdminContact() {
               <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+852 1234 5678" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Location (EN)</label>
-                <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Hong Kong" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Location (ZH)</label>
-                <input type="text" name="locationZh" value={formData.locationZh} onChange={handleChange} placeholder="香港" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
-              </div>
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Location</label>
+              <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Hong Kong" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white" />
             </div>
 
             <div>

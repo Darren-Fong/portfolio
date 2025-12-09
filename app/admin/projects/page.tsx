@@ -9,9 +9,7 @@ import { FaArrowLeft, FaPlus, FaTrash, FaChevronDown, FaChevronUp, FaSave } from
 
 interface Project {
   title: string
-  titleZh: string
   description: string
-  descriptionZh: string
   technologies: string[]
   githubUrl: string
   liveUrl?: string
@@ -59,9 +57,7 @@ export default function AdminProjects() {
       ...projects,
       {
         title: '',
-        titleZh: '',
         description: '',
-        descriptionZh: '',
         technologies: [],
         githubUrl: '',
       }
@@ -127,46 +123,24 @@ export default function AdminProjects() {
 
               {expandedIndex === index && (
                 <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Title (English)</label>
-                      <input
-                        type="text"
-                        value={project.title}
-                        onChange={(e) => updateProject(index, 'title', e.target.value)}
-                        className="input-field w-full"
-                        placeholder="Project Name"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Title (Chinese)</label>
-                      <input
-                        type="text"
-                        value={project.titleZh}
-                        onChange={(e) => updateProject(index, 'titleZh', e.target.value)}
-                        className="input-field w-full"
-                        placeholder="專案名稱"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Title</label>
+                    <input
+                      type="text"
+                      value={project.title}
+                      onChange={(e) => updateProject(index, 'title', e.target.value)}
+                      className="input-field w-full"
+                      placeholder="Project Name"
+                    />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2">Description (English)</label>
+                    <label className="block text-sm font-semibold mb-2">Description</label>
                     <textarea
                       value={project.description}
                       onChange={(e) => updateProject(index, 'description', e.target.value)}
                       className="input-field w-full h-24"
                       placeholder="Project description..."
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold mb-2">Description (Chinese)</label>
-                    <textarea
-                      value={project.descriptionZh}
-                      onChange={(e) => updateProject(index, 'descriptionZh', e.target.value)}
-                      className="input-field w-full h-24"
-                      placeholder="專案描述..."
                     />
                   </div>
 

@@ -12,13 +12,12 @@ export default function AdminAbout() {
   const router = useRouter()
   const { data, loading, saveData } = usePortfolioData('about')
   const [saving, setSaving] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [formData, setFormData] = useState({
     intro: '',
-    introZh: '',
     journey: '',
-    journeyZh: '',
     beyond: '',
-    beyondZh: '',
+    photoUrl: '',
   })
 
   useEffect(() => {
@@ -31,11 +30,9 @@ export default function AdminAbout() {
     if (data) {
       setFormData({
         intro: data.intro || '',
-        introZh: data.introZh || '',
         journey: data.journey || '',
-        journeyZh: data.journeyZh || '',
         beyond: data.beyond || '',
-        beyondZh: data.beyondZh || '',
+        photoUrl: data.photoUrl || '',
       })
     }
   }, [data])
@@ -61,6 +58,31 @@ export default function AdminAbout() {
       ...formData,
       [e.target.name]: e.target.value,
     })
+  }
+
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) throw new Error('Upload failed')
+
+      const { url } = await response.json()
+      setFormData(prev => ({ ...prev, photoUrl: url }))
+    } catch (error) {
+      alert('Failed to upload photo. Please try again.')
+    } finally {
+      setUploading(false)
+    }
   }
 
   if (loading) {
@@ -89,12 +111,47 @@ export default function AdminAbout() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="card">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Introduction Paragraph
+              Profile Photo
             </h2>
             
             <div className="mb-4">
               <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                Introduction (English)
+                Upload Photo
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoUpload}
+                disabled={uploading}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              />
+              {uploading && (
+                <p className="text-sm text-gray-500 mt-2">Uploading...</p>
+              )}
+            </div>
+
+            {formData.photoUrl && (
+              <div className="mb-4">
+                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
+                  Current Photo
+                </label>
+                <img
+                  src={formData.photoUrl}
+                  alt="Profile"
+                  className="w-32 h-32 rounded-full object-cover border-2 border-primary"
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="card">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              Introduction Paragraph
+            </h2>
+            
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
+                Introduction
               </label>
               <textarea
                 name="intro"
@@ -105,20 +162,6 @@ export default function AdminAbout() {
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
               />
             </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                Introduction (Chinese)
-              </label>
-              <textarea
-                name="introZh"
-                value={formData.introZh}
-                onChange={handleChange}
-                rows={4}
-                placeholder="我是一名充滿熱情的學生..."
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
-              />
-            </div>
           </div>
 
           <div className="card">
@@ -126,9 +169,9 @@ export default function AdminAbout() {
               Academic Journey
             </h2>
             
-            <div className="mb-4">
+            <div>
               <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                Journey (English)
+                Journey
               </label>
               <textarea
                 name="journey"
@@ -139,20 +182,6 @@ export default function AdminAbout() {
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
               />
             </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                Journey (Chinese)
-              </label>
-              <textarea
-                name="journeyZh"
-                value={formData.journeyZh}
-                onChange={handleChange}
-                rows={4}
-                placeholder="在學術旅程中..."
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
-              />
-            </div>
           </div>
 
           <div className="card">
@@ -160,9 +189,9 @@ export default function AdminAbout() {
               Beyond Academics
             </h2>
             
-            <div className="mb-4">
+            <div>
               <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                Beyond (English)
+                Beyond
               </label>
               <textarea
                 name="beyond"
@@ -170,20 +199,6 @@ export default function AdminAbout() {
                 onChange={handleChange}
                 rows={4}
                 placeholder="Beyond academics..."
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                Beyond (Chinese)
-              </label>
-              <textarea
-                name="beyondZh"
-                value={formData.beyondZh}
-                onChange={handleChange}
-                rows={4}
-                placeholder="除了學術之外..."
                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
               />
             </div>

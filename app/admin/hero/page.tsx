@@ -14,11 +14,8 @@ export default function AdminHero() {
   const [saving, setSaving] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
-    nameZh: '',
     title: '',
-    titleZh: '',
     description: '',
-    descriptionZh: '',
   })
 
   useEffect(() => {
@@ -31,11 +28,8 @@ export default function AdminHero() {
     if (data) {
       setFormData({
         name: data.name || '',
-        nameZh: data.nameZh || '',
         title: data.title || '',
-        titleZh: data.titleZh || '',
         description: data.description || '',
-        descriptionZh: data.descriptionZh || '',
       })
     }
   }, [data])
@@ -94,34 +88,18 @@ export default function AdminHero() {
               Name
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Name (English)
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Darren Fong"
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Name (Chinese)
-                </label>
-                <input
-                  type="text"
-                  name="nameZh"
-                  value={formData.nameZh}
-                  onChange={handleChange}
-                  placeholder="方子維"
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Darren Fong"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              />
             </div>
           </div>
 
@@ -130,34 +108,18 @@ export default function AdminHero() {
               Title/Role
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Title (English)
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  placeholder="Student | Developer | Problem Solver"
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Title (Chinese)
-                </label>
-                <input
-                  type="text"
-                  name="titleZh"
-                  value={formData.titleZh}
-                  onChange={handleChange}
-                  placeholder="學生 | 開發者 | 問題解決者"
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
+                Title
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Student | Developer | Problem Solver"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              />
             </div>
           </div>
 
@@ -166,34 +128,18 @@ export default function AdminHero() {
               Description
             </h2>
             
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Description (English)
-                </label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  rows={3}
-                  placeholder="Passionate about technology, competitive programming, and making a difference through innovation."
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Description (Chinese)
-                </label>
-                <textarea
-                  name="descriptionZh"
-                  value={formData.descriptionZh}
-                  onChange={handleChange}
-                  rows={3}
-                  placeholder="熱愛科技、競技編程，並透過創新帶來改變。"
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
+                Description
+              </label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                rows={3}
+                placeholder="Passionate about technology, competitive programming, and making a difference through innovation."
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+              />
             </div>
           </div>
 
