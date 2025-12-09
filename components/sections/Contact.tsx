@@ -4,9 +4,11 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
+import { usePortfolioData } from '@/hooks/usePortfolioData'
 
 export default function Contact() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const { data, loading } = usePortfolioData('contact')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,39 +38,49 @@ export default function Contact() {
     })
   }
 
+  if (loading) {
+    return (
+      <section className="section-padding bg-white dark:bg-gray-900 pt-24">
+        <div className="container-custom text-center">
+          <div className="text-2xl font-bold text-gray-500">Loading contact info...</div>
+        </div>
+      </section>
+    )
+  }
+
   const contactInfo = [
     {
       icon: <FaEnvelope />,
       label: t('contact.emailLabel'),
-      value: 'darren.fong@example.com',
-      href: 'mailto:darren.fong@example.com',
+      value: data?.email || '',
+      href: data?.email ? `mailto:${data.email}` : null,
     },
     {
       icon: <FaPhone />,
       label: t('contact.phone'),
-      value: '+852 9123 4567',
-      href: 'tel:+85291234567',
+      value: data?.phone || '',
+      href: data?.phone ? `tel:${data.phone}` : null,
     },
     {
       icon: <FaMapMarkerAlt />,
       label: t('contact.location'),
-      value: 'Hong Kong',
+      value: (language === 'zh' ? data?.locationZh : data?.location) || data?.location || '',
       href: null,
     },
-  ]
+  ].filter(item => item.value) // Only show items with values
 
   const socialLinks = [
     {
       icon: <FaGithub size={28} />,
       label: 'GitHub',
-      href: 'https://github.com/Darren-Fong',
+      href: data?.github || '',
     },
     {
       icon: <FaLinkedin size={28} />,
       label: 'LinkedIn',
-      href: 'https://linkedin.com/in/darren-fong',
+      href: data?.linkedin || '',
     },
-  ]
+  ].filter(item => item.href) // Only show items with links
 
   return (
     <section className="section-padding bg-white dark:bg-gray-900 pt-24">

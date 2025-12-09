@@ -20,82 +20,19 @@ interface Organisation {
 
 export default function Organisations() {
   const { t, language } = useLanguage()
-  const { data } = usePortfolioData('organisations')
+  const { data, loading } = usePortfolioData('organisations')
 
-  // Replace with your actual organisations
-  const defaultOrganisations: Organisation[] = [
-    {
-      type: 'school',
-      name: 'Student Council',
-      role: 'Vice President',
-      period: '2023 - 2024',
-      description: 'Led initiatives to improve student life and organised school-wide events.',
-      achievements: [
-        'Organised annual charity fundraiser raising $10,000',
-        'Implemented new student feedback system',
-        'Coordinated 15+ school events',
-      ],
-    },
-    {
-      type: 'school',
-      name: 'School Prefect Team',
-      role: 'Head Prefect',
-      period: '2023 - 2024',
-      description: 'Managed team of 30 prefects and ensured smooth school operations.',
-      achievements: [
-        'Developed new prefect training program',
-        'Improved school discipline system',
-      ],
-    },
-    {
-      type: 'club',
-      name: 'Coding Club',
-      role: 'President',
-      period: '2022 - 2024',
-      description: 'Founded and led the school coding club, teaching programming to 50+ students.',
-      achievements: [
-        'Grew club from 10 to 50+ members',
-        'Organised hackathons and coding workshops',
-        'Mentored students in competition preparation',
-      ],
-    },
-    {
-      type: 'club',
-      name: 'Debate Society',
-      role: 'Member',
-      period: '2021 - 2024',
-      description: 'Participated in weekly debates and represented school in inter-school competitions.',
-      achievements: [
-        'Won 3 inter-school debate competitions',
-        'Improved public speaking and critical thinking',
-      ],
-    },
-    {
-      type: 'external',
-      name: 'Youth Climate Action',
-      role: 'Volunteer Coordinator',
-      period: '2023 - Present',
-      description: 'Coordinated environmental awareness campaigns and community clean-up events.',
-      achievements: [
-        'Organised 10+ community clean-up events',
-        'Engaged 200+ youth volunteers',
-        'Partnered with local government for sustainability initiatives',
-      ],
-    },
-    {
-      type: 'external',
-      name: 'Tech for Good Initiative',
-      role: 'Web Developer',
-      period: '2022 - Present',
-      description: 'Developed websites for non-profit organisations to amplify their social impact.',
-      achievements: [
-        'Built websites for 3 NGOs',
-        'Provided pro-bono tech consulting',
-      ],
-    },
-  ]
+  if (loading) {
+    return (
+      <section className="section-padding bg-gray-50 dark:bg-gray-800 pt-24">
+        <div className="container-custom text-center">
+          <div className="text-2xl font-bold text-gray-500">Loading organisations...</div>
+        </div>
+      </section>
+    )
+  }
   
-  const organisations: Organisation[] = (data && Array.isArray(data)) ? data : defaultOrganisations
+  const organisations: Organisation[] = (data && Array.isArray(data)) ? data : []
 
   const schoolOrgs = organisations.filter(org => org.type === 'school')
   const clubOrgs = organisations.filter(org => org.type === 'club')

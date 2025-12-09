@@ -8,9 +8,19 @@ import { usePortfolioData } from '@/hooks/usePortfolioData'
 
 export default function Competitions() {
   const { t, language } = useLanguage()
-  const { data } = usePortfolioData('competitions')
+  const { data, loading } = usePortfolioData('competitions')
   
-  let categories = competitionsData[language]
+  if (loading) {
+    return (
+      <section className="section-padding bg-white dark:bg-gray-900 pt-24">
+        <div className="container-custom text-center">
+          <div className="text-2xl font-bold text-gray-500">Loading competitions...</div>
+        </div>
+      </section>
+    )
+  }
+
+  let categories: any[] = []
 
   if (data) {
     if (Array.isArray(data)) {
@@ -54,7 +64,7 @@ export default function Competitions() {
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {category.items.map((comp, index) => (
+                {category.items.map((comp: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}

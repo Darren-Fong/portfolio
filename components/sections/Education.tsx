@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { FaGraduationCap, FaCertificate } from 'react-icons/fa'
+import { useLanguage } from '@/context/LanguageContext'
+import { usePortfolioData } from '@/hooks/usePortfolioData'
 
 interface EducationItem {
   type: 'education' | 'certification'
@@ -13,61 +15,30 @@ interface EducationItem {
 }
 
 export default function Education() {
-  // Replace with your actual education and certifications
-  const items: EducationItem[] = [
-    {
-      type: 'education',
-      institution: 'Your High School',
-      degree: 'High School Diploma',
-      year: '2020 - 2024',
-      details: 'GPA: 4.0/4.0',
-    },
-    {
-      type: 'education',
-      institution: 'HKDSE',
-      degree: 'Hong Kong Diploma of Secondary Education',
-      year: '2024',
-      score: 'Overall: 5** in Mathematics, Physics, Chemistry',
-    },
-    {
-      type: 'education',
-      institution: 'IAL',
-      degree: 'International Advanced Levels',
-      year: '2024',
-      score: 'A* in Mathematics, A* in Physics, A in Chemistry',
-    },
-    {
-      type: 'certification',
-      institution: 'IELTS',
-      degree: 'International English Language Testing System',
-      year: '2024',
-      score: 'Overall Band: 8.5',
-    },
-    {
-      type: 'certification',
-      institution: 'Coursera',
-      degree: 'Machine Learning Specialization',
-      year: '2024',
-      details: 'Offered by Stanford University & DeepLearning.AI',
-    },
-    {
-      type: 'certification',
-      institution: 'Coursera',
-      degree: 'Full Stack Web Development',
-      year: '2023',
-      details: 'Offered by The Hong Kong University of Science and Technology',
-    },
-    {
-      type: 'certification',
-      institution: 'Coursera',
-      degree: 'iOS App Development with Swift',
-      year: '2023',
-      details: 'Offered by University of Toronto',
-    },
-  ]
+  const { t, language } = useLanguage()
+  const { data, loading } = usePortfolioData('education')
 
-  const education = items.filter(item => item.type === 'education')
-  const certifications = items.filter(item => item.type === 'certification')
+  if (loading) {
+    return (
+      <section className="section-padding bg-gray-50 dark:bg-gray-800 pt-24">
+        <div className="container-custom text-center">
+          <div className="text-2xl font-bold text-gray-500">Loading education...</div>
+        </div>
+      </section>
+    )
+  }
+
+  // Convert single admin entry to array item if it exists
+  const education: EducationItem[] = (data && Object.keys(data).length > 0) ? [{
+    type: 'education',
+    institution: (language === 'zh' ? data.schoolZh : data.school) || data.school,
+    degree: (language === 'zh' ? data.degreeZh : data.degree) || data.degree,
+    year: (language === 'zh' ? data.periodZh : data.period) || data.period,
+    details: (language === 'zh' ? data.descriptionZh : data.description) || data.description,
+  }] : []
+
+  // Currently admin doesn't support certifications, so we leave it empty or static
+  const certifications: EducationItem[] = []
 
   return (
     <section id="education" className="section-padding bg-gray-50 dark:bg-gray-800">

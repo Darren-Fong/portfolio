@@ -2,10 +2,34 @@
 
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
+import { usePortfolioData } from '@/hooks/usePortfolioData'
 import Image from 'next/image'
 
 export default function About() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const { data, loading } = usePortfolioData('about')
+
+  const intro = (data && Object.keys(data).length > 0)
+    ? (language === 'en' ? data.intro : data.introZh) || t('about.intro')
+    : t('about.intro')
+  
+  const journey = (data && Object.keys(data).length > 0)
+    ? (language === 'en' ? data.journey : data.journeyZh) || t('about.journey')
+    : t('about.journey')
+    
+  const beyond = (data && Object.keys(data).length > 0)
+    ? (language === 'en' ? data.beyond : data.beyondZh) || t('about.beyond')
+    : t('about.beyond')
+
+  if (loading) {
+    return (
+      <section className="section-padding bg-white dark:bg-gray-900 pt-24">
+        <div className="container-custom text-center">
+          <div className="text-2xl font-bold text-gray-500">Loading about info...</div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="section-padding bg-white dark:bg-gray-900 pt-24">
@@ -46,15 +70,15 @@ export default function About() {
                 className="card"
               >
                 <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                  {t('about.intro')}
+                  {intro}
                 </p>
                 
                 <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                  {t('about.journey')}
+                  {journey}
                 </p>
                 
                 <p className="text-lg text-gray-700 dark:text-gray-300">
-                  {t('about.beyond')}
+                  {beyond}
                 </p>
               </motion.div>
 
