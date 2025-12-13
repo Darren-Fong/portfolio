@@ -22,13 +22,28 @@ export default function Contact() {
     e.preventDefault()
     setStatus('sending')
     
-    // Here you would typically send the form data to an API endpoint
-    // For now, we'll just simulate a successful submission
-    setTimeout(() => {
-      setStatus('success')
-      setFormData({ name: '', email: '', subject: '', message: '' })
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        setTimeout(() => setStatus(''), 3000)
+      } else {
+        setStatus('error')
+        setTimeout(() => setStatus(''), 3000)
+      }
+    } catch (error) {
+      console.error('Error sending message:', error)
+      setStatus('error')
       setTimeout(() => setStatus(''), 3000)
-    }, 1500)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -253,6 +268,16 @@ export default function Contact() {
                     className="mt-4 text-green-600 dark:text-green-400 text-center"
                   >
                     {t('contact.success')}
+                  </motion.p>
+                )}
+                
+                {status === 'error' && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 text-red-600 dark:text-red-400 text-center"
+                  >
+                    Failed to send message. Please try again.
                   </motion.p>
                 )}
               </form>
